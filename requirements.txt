@@ -17,10 +17,13 @@ transformers==4.5.1
 # Step 3 - Install the packages above, using the following terminal command:
 # pip install -r requirements.txt
 
+# Step 4 - Revert "packaging" version to 21.3, using the following terminal command:
+# pip install packaging==21.3
+
 # NOTE: If you have GPU on your machine, continue to steps 4 & 5 below. Otherwise you're done!
 
 # Step 4 - Install pytorch with CUDA GPU support, using the following terminal command:
-# conda install pytorch pytorch-cuda=11.8 -c pytorch -c nvidia
+# pip install torch==1.7.1+cu110 -f https://download.pytorch.org/whl/torch_stable.html
 
 # Step 5 - Check if CUDA installation was successful, using the following terminal command:
 # python utils/cuda_check.py
