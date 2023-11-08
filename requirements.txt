@@ -1,9 +1,26 @@
+# Step 1 - Create a new conda environment, using the following terminal command:
+# conda create --name hicu python=3.8 
+
+# Step 2 - Activate the newly created environment, using the following terminal command:
+# conda activate hicu
+
 gensim==4.1.2
 nltk==3.5
 numpy==1.18.1
 pandas==1.0.0
 scikit_learn==1.1.1
 scipy==1.4.1
-torch==1.7.1
+torch==1.7.1 # NOTE: If you have GPU on your machine, comment out this line before moving on to step 3
 tqdm==4.62.3
 transformers==4.5.1
+
+# Step 3 - Install the packages above, using the following terminal command:
+# pip install -r requirements.txt
+
+# NOTE: If you have GPU on your machine, continue to steps 4 & 5 below. Otherwise you're done!
+
+# Step 4 - Install pytorch with CUDA GPU support, using the following terminal command:
+# conda install pytorch pytorch-cuda=11.8 -c pytorch -c nvidia
+
+# Step 5 - Check if CUDA installation was successful, using the following terminal command:
+# python utils/cuda_check.py
