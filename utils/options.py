@@ -1,3 +1,5 @@
+# Create preset command-line arguments, such that users can experiment with different configs without modifying source code
+
 import argparse
 import sys
 

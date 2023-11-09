@@ -1,6 +1,7 @@
 Our data preprocessing follows [MultiResCNN](https://github.com/foxlf823/Multi-Filter-Residual-Convolutional-Neural-Network) and [CAML](https://github.com/jamesmullenbach/caml-mimic) with slight modifications. To set up the dataset, follow the instructions below:
 
 1. Download MIMIC-III dataset from [PhysioNet](https://physionet.org/content/mimiciii/1.4/).
+Detailed description of dataset content is available at the [Official MIMIC Website](https://mimic.mit.edu/docs/iii/tables/)
 
 2. Place the MIMIC-III files into `/data` as shown below:
 ```
