@@ -128,5 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Ignore data folder
+# Ignore input & output data folders
 data
+models
