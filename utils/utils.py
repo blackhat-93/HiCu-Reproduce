@@ -240,7 +240,7 @@ def reformat(code, is_diag):
 
 import nltk
 from nltk.tokenize import RegexpTokenizer
-nltk.download("punkt")
+nltk.download("punkt", quiet=True)
 nlp_tool = nltk.data.load('tokenizers/punkt/english.pickle')
 tokenizer = RegexpTokenizer(r'\w+')
 def write_discharge_summaries(out_file, min_sentence_len, notes_file):
