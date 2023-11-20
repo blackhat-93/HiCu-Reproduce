@@ -17,8 +17,8 @@ def train(args, model, optimizer, scheduler, epoch, gpu, data_loader, cur_depth)
 
             inputs_id, segments, masks, labels = next(data_iter)
 
-            inputs_id, segments, masks, labels = torch.LongTensor(inputs_id), torch.LongTensor(segments), \
-                                                 torch.LongTensor(masks), torch.FloatTensor(labels[cur_depth])
+            inputs_id, segments, masks, labels = torch.LongTensor(np.array(inputs_id)), torch.LongTensor(np.array(segments)), \
+                                                 torch.LongTensor(np.array(masks)), torch.FloatTensor(np.array(labels[cur_depth]))
 
             if gpu[0] >= 0:
                 inputs_id, segments, masks, labels = inputs_id.cuda(), segments.cuda(), \
@@ -28,7 +28,7 @@ def train(args, model, optimizer, scheduler, epoch, gpu, data_loader, cur_depth)
         else:
             inputs_id, labels, text_inputs = next(data_iter)
 
-            inputs_id, labels = torch.LongTensor(inputs_id), torch.FloatTensor(labels[cur_depth])
+            inputs_id, labels = torch.LongTensor(np.array(inputs_id)), torch.FloatTensor(np.array(labels[cur_depth]))
 
             if gpu[0] >= 0:
                 inputs_id, labels, text_inputs = inputs_id.cuda(), labels.cuda(), text_inputs.cuda()
@@ -66,8 +66,8 @@ def test(args, model, data_path, fold, gpu, dicts, data_loader, cur_depth=4):
             if args.model.find("bert") != -1 or args.model.find("xlnet") != -1 or args.model.find("longformer") != -1:
                 inputs_id, segments, masks, labels = next(data_iter)
 
-                inputs_id, segments, masks, labels = torch.LongTensor(inputs_id), torch.LongTensor(segments), \
-                                                     torch.LongTensor(masks), torch.FloatTensor(labels[cur_depth])
+                inputs_id, segments, masks, labels = torch.LongTensor(np.array(inputs_id)), torch.LongTensor(np.array(segments)), \
+                                                     torch.LongTensor(np.array(masks)), torch.FloatTensor(np.array(labels[cur_depth]))
 
                 if gpu[0] >= 0:
                     inputs_id, segments, masks, labels = inputs_id.cuda(), segments.cuda(), masks.cuda(), labels.cuda()
@@ -77,7 +77,7 @@ def test(args, model, data_path, fold, gpu, dicts, data_loader, cur_depth=4):
 
                 inputs_id, labels, text_inputs = next(data_iter)
 
-                inputs_id, labels, = torch.LongTensor(inputs_id), torch.FloatTensor(labels[cur_depth])
+                inputs_id, labels, = torch.LongTensor(np.array(inputs_id)), torch.FloatTensor(np.array(labels[cur_depth]))
 
                 if gpu[0] >= 0:
                     inputs_id, labels, text_inputs = inputs_id.cuda(), labels.cuda(), text_inputs.cuda()
