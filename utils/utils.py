@@ -737,13 +737,21 @@ def save_metrics(metrics_hist_all, model_dir):
         data.update({"%s_tr" % (name):val for (name,val) in metrics_hist_all[2].items()})
         json.dump(data, metrics_file, indent=1)
 
+def save_test_results(metrics_hist_all, model_dir):
+    with open(model_dir + "/test_results.csv", mode="w", newline='') as file:
+        # Extract only the metrics mentioned in the paper
+        paper_metrics =["auc_macro", "auc_micro", "f1_macro", "f1_micro", "prec_at_5", "prec_at_8", "prec_at_15"]
+        paper_results = {key: metrics_hist_all[1][key][0] for key in paper_metrics if key in metrics_hist_all[1]}
+        writer = csv.writer(file)
+        writer.writerow(paper_results.keys())
+        writer.writerow(paper_results.values())
 
 import torch
-def save_everything(args, metrics_hist_all, model, model_dir, params, criterion, evaluate=False):
+def save_everything(args, metrics_hist_all, model, model_dir, params, criterion, test_only=False):
 
     save_metrics(metrics_hist_all, model_dir)
 
-    if not evaluate:
+    if not test_only:
         #save the model with the best criterion metric
         if not np.all(np.isnan(metrics_hist_all[0][criterion])):
             if criterion == 'loss_dev':
@@ -758,6 +766,10 @@ def save_everything(args, metrics_hist_all, model, model_dir, params, criterion,
                 else:
                     sd = model_save.cpu().state_dict()
                 torch.save(sd, model_dir + "/model_best_%s.pth" % criterion)
+    else:
+        # Save test results to a separate file
+        save_test_results(metrics_hist_all, model_dir)
+
     print("saved metrics, params, model to directory %s\n" % (model_dir))
 
 
