@@ -144,8 +144,19 @@ if __name__ == "__main__":
                     model.decoder.change_depth(cur_depth)
         for epoch in range(epochs[cur_depth]):
             if epoch == 0 and cur_depth == start_depth and not args.test_model:
-                model_dir = os.path.join(args.MODEL_DIR, '_'.join([args.model, args.decoder, time.strftime('%b_%d_%H_%M_%S', time.localtime())]))
+                # Add model args to directory name for easy identification
+                model_dir = os.path.join(args.MODEL_DIR, '_'.join([args.model, 
+                                                                   args.decoder, 
+                                                                   ("C" if args.cat_hyperbolic else "A"), 
+                                                                   args.loss, 
+                                                                   args.Y, 
+                                                                   time.strftime('%b_%d_%H_%M_%S', time.localtime())]))
                 os.makedirs(model_dir)
+                # Save all model args to .csv file for record keeping
+                with open(os.path.join(model_dir, "config.csv"), mode="w", newline='') as file:
+                    writer = csv.writer(file)
+                    for key, value in vars(args).items():
+                        writer.writerow([key, value])
             elif args.test_model:
                 model_dir = os.path.dirname(os.path.abspath(args.test_model))
 
