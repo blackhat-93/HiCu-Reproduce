@@ -1,7 +1,7 @@
 import os
 
 # Edit value of num_runs to change the number of repeat runs
-num_runs = 1
+num_runs = 3
 for i in range(1, num_runs + 1):
     print(f"Starting run No. {i} of {num_runs}")
     
