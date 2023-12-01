@@ -882,6 +882,37 @@ def auc_metrics(yhat_raw, y, ymic):
 
     return roc_auc
 
+def auc_rare(yhat_raw, y):
+    if yhat_raw.shape[0] <= 1:
+        return
+    fpr = {}
+    tpr = {}
+    roc_auc_rare = {}
+
+    # Initialize dictionary to hold AUC scores of rare labels grouped by # of occurences
+    rare_scores = {k: [] for k in range(1,51)} 
+
+    # Calculate AUC for each individual label
+    for i in range(y.shape[1]):
+        # Check that label has at least 1 true positive
+        occur_count = int(y[:, i].sum())
+        if occur_count > 0:
+            fpr[i], tpr[i], _ = roc_curve(y[:,i], yhat_raw[:,i])
+            if len(fpr[i]) > 1 and len(tpr[i]) > 1:
+                auc_score = auc(fpr[i], tpr[i])
+                if not np.isnan(auc_score):
+                    # Add individual AUC scores into rare groups
+                    if occur_count in rare_scores.keys():
+                        rare_scores[occur_count].append(auc_score)
+
+    # Calculate averaged AUC for each rare group
+    for k, scores in rare_scores.items():
+        # Check that group has at least 1 instance
+        if len(scores) > 0:
+            roc_auc_rare[f'auc_rare_{k}'] = np.mean(scores)
+
+    return roc_auc_rare
+
 def recall_at_k(yhat_raw, y, k):
     #num true labels in top k predictions / num true labels
     sortd = np.argsort(yhat_raw)[:,::-1]
