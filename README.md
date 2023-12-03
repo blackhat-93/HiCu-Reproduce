@@ -18,8 +18,9 @@ If your local machine has at least 22Gb of RAM and 20Gb of GPU memory, you can t
 
 If you want to train the models on the cloud using Google Colab, follow the steps below:
 1. Create a folder called `HiCu-Reproduce` at the root of your Google Drive storage
-2. Copy your locally preprocessed data into the subfolder `data`
-3. Run the file `Colab_Notebook.ipynb`
+2. Clone this repo into the `HiCu-Reproduce` folder from step 1
+3. Copy your locally preprocessed data into the subfolder `/HiCu-Reproduce/data`
+4. Run the file `Colab_Notebook.ipynb`
 
 Acknowledgement
 -----
