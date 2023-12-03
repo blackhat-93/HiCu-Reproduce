@@ -10,8 +10,6 @@ for i in range(1, num_runs + 1):
         "--model MultiResCNN "
         "--vocab ./data/mimic3/vocab.csv "
         "--decoder HierarchicalHyperbolic "
-        "--loss ASL "
-        "--asl_config 1,0,0.03 "
         "--Y 50 "
         "--data_path ./data/mimic3/train_50.csv "
         "--MAX_LENGTH 4096 "

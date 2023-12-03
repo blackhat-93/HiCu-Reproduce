@@ -10,6 +10,7 @@ for i in range(1, num_runs + 1):
         "--model MultiResCNN "
         "--vocab ./data/mimic3/vocab.csv "
         "--decoder HierarchicalHyperbolic "
+        "--cat_hyperbolic "
         "--loss ASL "
         "--asl_config 1,0,0.03 "
         "--Y 50 "

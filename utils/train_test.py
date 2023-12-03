@@ -1,7 +1,7 @@
 
 import torch
 import numpy as np
-from utils.utils import all_metrics, print_metrics
+from utils.utils import all_metrics, print_metrics, auc_rare
 
 
 def train(args, model, optimizer, scheduler, epoch, gpu, data_loader, cur_depth):
@@ -103,5 +103,6 @@ def test(args, model, data_path, fold, gpu, dicts, data_loader, cur_depth=4):
     k = [5, 8, 15]
     metrics = all_metrics(yhat, y, k=k, yhat_raw=yhat_raw)
     print_metrics(metrics)
+    # metrics.update(auc_rare(yhat_raw=yhat_raw, y=y)) # Uncomment this line to add AUC scores of rare codes to test output
     metrics['loss_%s' % fold] = np.mean(losses)
     return metrics
