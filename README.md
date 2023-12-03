@@ -21,6 +21,7 @@ If you want to train the models on the cloud using Google Colab, follow the step
 2. Clone this repo into the `HiCu-Reproduce` folder from step 1
 3. Copy your locally preprocessed data into the subfolder `/HiCu-Reproduce/data`
 4. Run the file `Colab_Notebook.ipynb`
+(Most models can be trained on the lowest-tier GPU. An exception is the RAC models, which may need multiple high-end GPUs)
 
 Acknowledgement
 -----
